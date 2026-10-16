@@ -6,42 +6,10 @@ I talk to it through Discord and Telegram, or directly from the terminal.
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    U([Me: Discord / Telegram / CLI]) --> O
-
-    subgraph fast["Fast tier · qwen3.5 9B · always warm"]
-        O[Orchestrator<br/>routes only]
-        S[Secretary]
-        T[Task Manager]
-    end
-
-    subgraph heavy["Heavy tier · qwen3.6 27B · loaded on demand"]
-        R[Researcher]
-        C[Coder]
-        V[Validator]
-        Y[YouTube Partner]
-        F[Film Partner]
-    end
-
-    O -->|delegate| R & C & S & T & Y & F
-    R & C -. high-stakes output .-> V
-    V -->|APPROVED / REJECTED| O
-
-    subgraph vault["Shared Obsidian vault · schema-enforced via vault_write.py"]
-        G[(Goals)]
-        SC[(Schedule)]
-        RE[(Research)]
-        VA[(Validation)]
-        OT[(Code · Content · Editing)]
-    end
-
-    T --> G
-    G -->|07:00 cron| S --> SC
-    R --> RE
-    V --> VA
-    C & Y & F --> OT
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture-dark.svg">
+  <img alt="Architecture: an orchestrator on a 9B model delegates to seven specialists split into a fast and a heavy tier; the Validator checks Researcher and Coder output (MAVF); every agent writes to its own folder in a shared Obsidian vault, and a 07:00 cron job has the Secretary plan the day from the Goals folder." src="docs/architecture-light.svg" width="100%">
+</picture>
 
 | Agent | Model | Role |
 |---|---|---|
@@ -78,6 +46,7 @@ flowchart TB
 | `tests/` | Tests for the vault writer |
 | `vault/` | Vault structure, frontmatter schema and the Obsidian Bases views |
 | `setup/` | Install, model and configuration scripts, plus a health check |
+| `docs/` | Architecture diagram (light and dark) and the script that generates it |
 
 ## Setup
 
