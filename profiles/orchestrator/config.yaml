@@ -1,0 +1,66 @@
+# orchestrator
+model:
+  default: qwen3.5:9b-64k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: orchestrator
+  description: >-
+    Front door for every request. Classifies the task and delegates to the right specialist(s). Does not do deep work itself.
+  max_turns: 90
+  verify_on_stop: false
+  # The orchestrator routes, it does not work. Everything that would let it
+  # answer on its own (web, browser, code, media) is switched off.
+  disabled_toolsets:
+    - browser
+    - code_execution
+    - computer_use
+    - image_gen
+    - kanban
+    - search
+    - session_search
+    - tts
+    - video
+    - video_gen
+    - vision
+    - web
+    - x_search
+
+multi_agent:
+  enabled: true
+  max_concurrent_workers: 2   # two 27B workers is the ceiling on 24 GB VRAM
+  worker_timeout: 900
+  result_format: structured
+
+memory:
+  memory_enabled: false       # stateless router: memory lives with the specialists and the vault
+  user_profile_enabled: false
+
+compression:
+  enabled: false
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - delegation
+    - file
+    - memory
+    - skills
+  discord:
+    - delegation
+    - file
+    - memory
+    - skills
+  telegram:
+    - delegation
+    - file
+    - memory
+    - skills

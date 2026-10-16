@@ -1,0 +1,60 @@
+# coder
+model:
+  default: qwen3.6:27b-128k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: coder
+  description: >-
+    Technical/programming specialist. Writes, debugs, and explains code; runs it when a terminal backend is available.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local
+web:
+  backend: searxng            # self-hosted metasearch, no external API
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - clarify
+    - code_execution
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - web
+  discord:
+    - clarify
+    - code_execution
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - web
+  telegram:
+    - clarify
+    - code_execution
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - web

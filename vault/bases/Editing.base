@@ -1,0 +1,12 @@
+views:
+  - type: table
+    name: "Editing"
+    filters:
+      and:
+        - 'file.inFolder("Editing")'
+    order:
+      - project
+      - stage
+      - resolve_page
+      - updated
+    limit: 200

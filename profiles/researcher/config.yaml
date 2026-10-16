@@ -1,0 +1,66 @@
+# researcher
+model:
+  default: qwen3.6:27b-128k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: researcher
+  description: >-
+    Deep research and fact-finding specialist. Reads source code and external docs, cross-checks claims, writes findings with sources.
+  max_turns: 150
+  verify_on_stop: false
+
+web:
+  backend: firecrawl          # full-page extraction for multi-source research
+browser:
+  cloud_provider: local
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - vision
+    - web
+  discord:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - vision
+    - web
+  telegram:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - vision
+    - web

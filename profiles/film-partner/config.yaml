@@ -1,0 +1,67 @@
+# film-partner
+model:
+  default: qwen3.6:27b-128k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: film-partner
+  description: >-
+    Film-editing collaborator specialized in DaVinci Resolve. Helps translate creative vision into concrete edit/color/timeline decisions.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - clarify
+    - code_execution
+    - computer_use
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+  discord:
+    - clarify
+    - code_execution
+    - computer_use
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+  telegram:
+    - clarify
+    - code_execution
+    - computer_use
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision

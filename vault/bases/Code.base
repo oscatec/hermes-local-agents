@@ -1,0 +1,11 @@
+views:
+  - type: table
+    name: "Code"
+    filters:
+      and:
+        - 'file.inFolder("Code")'
+    order:
+      - project
+      - status
+      - updated
+    limit: 200

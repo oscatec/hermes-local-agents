@@ -1,0 +1,65 @@
+# validator
+model:
+  default: qwen3.6:27b-128k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: validator
+  description: >-
+    MAVF verification agent. Reviews another agent's output against concrete evidence before it reaches the user. Never produces original work, only checks it.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local              # re-runs tests itself instead of trusting reports
+web:
+  backend: searxng
+browser:
+  cloud_provider: local
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+# No memory toolset on purpose: every verdict is judged on the evidence in
+# front of it, not on what earlier rounds concluded.
+
+platform_toolsets:
+  cli:
+    - browser
+    - clarify
+    - code_execution
+    - file
+    - session_search
+    - skills
+    - terminal
+    - vision
+    - web
+  discord:
+    - browser
+    - clarify
+    - code_execution
+    - file
+    - session_search
+    - skills
+    - terminal
+    - vision
+    - web
+  telegram:
+    - browser
+    - clarify
+    - code_execution
+    - file
+    - session_search
+    - skills
+    - terminal
+    - vision
+    - web

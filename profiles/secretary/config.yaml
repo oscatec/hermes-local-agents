@@ -1,0 +1,55 @@
+# secretary
+model:
+  default: qwen3.5:9b-64k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: secretary
+  description: >-
+    Daily schedule manager. Assigns one-step actions per day toward the user's active goals, respecting existing calendar commitments.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local              # needed to call tools/vault_write.py
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+# The 07:00 daily-planning routine is a Hermes cron job, registered by
+# setup/03-configure.sh (see `secretary cron list`), not a config key.
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - skills
+    - terminal
+    - todo
+  discord:
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - skills
+    - terminal
+    - todo
+  telegram:
+    - clarify
+    - cronjob
+    - file
+    - memory
+    - skills
+    - terminal
+    - todo

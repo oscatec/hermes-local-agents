@@ -1,0 +1,11 @@
+views:
+  - type: table
+    name: "Validation"
+    filters:
+      and:
+        - 'file.inFolder("Validation")'
+    order:
+      - verdict
+      - target
+      - updated
+    limit: 200

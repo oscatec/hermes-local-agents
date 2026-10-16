@@ -1,0 +1,12 @@
+views:
+  - type: table
+    name: "Research"
+    filters:
+      and:
+        - 'file.inFolder("Research")'
+    order:
+      - topic
+      - status
+      - confidence
+      - updated
+    limit: 200

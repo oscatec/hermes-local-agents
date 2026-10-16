@@ -1,0 +1,52 @@
+# task-manager
+model:
+  default: qwen3.5:9b-64k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: task-manager
+  description: >-
+    Long-term goal decomposition. Breaks big goals into small, routine-sized steps and stores them as Goals/ notes in the shared vault for secretary to schedule.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - clarify
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+  discord:
+    - clarify
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+  telegram:
+    - clarify
+    - file
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo

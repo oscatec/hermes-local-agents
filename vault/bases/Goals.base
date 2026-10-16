@@ -1,0 +1,13 @@
+views:
+  - type: table
+    name: "Goals"
+    filters:
+      and:
+        - 'file.inFolder("Goals")'
+    order:
+      - title
+      - goal
+      - status
+      - priority
+      - updated
+    limit: 200

@@ -1,0 +1,74 @@
+# youtube-partner
+model:
+  default: qwen3.6:27b-128k
+  provider: custom
+  base_url: http://localhost:11434/v1
+
+agent:
+  name: youtube-partner
+  description: >-
+    Content creation collaborator. Works through the YouTube workflow with the user - ideation, scripting, structure, titles/thumbnails, publishing checklist.
+  max_turns: 150
+  verify_on_stop: false
+
+terminal:
+  backend: local
+web:
+  backend: searxng            # trends go stale fast, so it searches instead of recalling
+browser:
+  cloud_provider: local
+
+env:
+  HERMES_VAULT: ~/HermesVault
+
+model_provider:
+  type: openai-compatible
+  base_url: http://localhost:11434/v1
+
+skills:
+  external_dirs:
+    - ~/.hermes/shared-skills
+
+platform_toolsets:
+  cli:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
+  discord:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
+  telegram:
+    - browser
+    - clarify
+    - cronjob
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
